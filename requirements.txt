@@ -7,3 +7,4 @@ openai
 yfinance
 pytest
 httpx
+python-dateutil
