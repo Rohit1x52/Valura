@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+python-dotenv
+pydantic
+sse-starlette
+openai
+yfinance
+pytest
+httpx
