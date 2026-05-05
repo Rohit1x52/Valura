@@ -1,3 +1,4 @@
+import os
 import pytest
 import json
 from pathlib import Path
@@ -8,6 +9,29 @@ from src.models import (
     UserContext, UserProfile, PortfolioHolding,
     ClassificationResult, ExtractedEntities
 )
+
+
+@pytest.fixture(scope="session", autouse=True)
+def set_dummy_openai_key():
+    """Set a dummy OPENAI_API_KEY for the entire test session.
+    This prevents the classifier constructor from raising ValueError
+    before the OpenAI mock can intercept calls. No real API calls are
+    made because all tests that use the classifier also patch OpenAI.
+    """
+    original = os.environ.get("OPENAI_API_KEY")
+    os.environ["OPENAI_API_KEY"] = "sk-test-dummy-key-for-pytest"
+    # Reload the config so the module-level singleton picks up the new value
+    from src import config as cfg_module
+    cfg_module.config.OPENAI_API_KEY = "sk-test-dummy-key-for-pytest"
+    yield
+    # Restore original state after session
+    if original is None:
+        os.environ.pop("OPENAI_API_KEY", None)
+        cfg_module.config.OPENAI_API_KEY = ""
+    else:
+        os.environ["OPENAI_API_KEY"] = original
+        cfg_module.config.OPENAI_API_KEY = original
+
 
 @pytest.fixture(scope="session")
 def fixtures_dir():
