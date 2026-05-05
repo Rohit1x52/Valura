@@ -10,3 +10,4 @@ httpx
 python-dateutil
 openai
 numpy
+pandas
