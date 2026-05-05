@@ -1,10 +1,3 @@
-"""
-Portfolio Health Agent - fully implemented specialist agent
-
-Analyzes portfolio composition, risk, performance, and provides actionable insights
-This is the agent a novice investor hits when asking "how is my portfolio doing?"
-"""
-
 import asyncio
 from typing import Dict, List, Optional
 from datetime import datetime, timedelta
