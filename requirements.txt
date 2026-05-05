@@ -9,3 +9,4 @@ pytest
 httpx
 python-dateutil
 openai
+numpy
