@@ -39,11 +39,15 @@ class SafetyGuard:
         
         patterns = {
             "insider_trading": [
+                r'\binsider\s+trading\b',
+                r'\binsider\s+trading\s+(?:info|information)\b',
                 r'\binsider\s+(?:info|information|tip|knowledge)',
                 r'\bnon[- ]?public\s+(?:info|information)',
                 r'\bmaterial\s+non[- ]?public',
                 r'\btrade\s+(?:on|using)\s+(?:inside|insider)',
                 r'\bmnpi\b',  # material non-public information acronym
+                r'\bunannounced\s+product',
+                r'\bfriend\s+works\s+at\s+\w+',
             ],
             
             "market_manipulation": [
@@ -58,7 +62,7 @@ class SafetyGuard:
             "guaranteed_returns": [
                 r'\bguaranteed?\s+(?:return|profit|gain)',
                 r'\brisk[- ]?free\s+(?:return|profit|investment)',
-                r'\bcan[\'']?t\s+lose\b',
+                r"\bcan[']?t\s+lose\b",
                 r'\bno\s+risk\b',
                 r'\b100%\s+(?:safe|guaranteed|certain)',
                 r'\bzero\s+risk\b',
@@ -118,8 +122,8 @@ class SafetyGuard:
         # Check for negation/prohibition context
         # "Why shouldn't I__", "Don't do X because__"
         negation_patterns = [
-            r'\bshould(?:n[\'']t|n\'t| not)\b',
-            r'\bdo(?:n[\'']t|n\'t| not)\b',
+            r"\bshould(?:n't|n't| not)\b",
+            r"\bdo(?:n't|n't| not)\b",
             r'\bwhy.*(?:illegal|wrong|bad)\b',
             r'\bconsequences?\s+of\b',
         ]
