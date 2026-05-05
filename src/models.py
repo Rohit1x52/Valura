@@ -156,7 +156,9 @@ def compare_entities(expected: ExtractedEntities, actual: ExtractedEntities, tol
     if not expected_tickers.issubset(actual_tickers):
         return False
     
-    if expected.amount is not None and actual.amount is not None:
+    if expected.amount is not None:
+        if actual.amount is None:
+            return False
         diff = abs(expected.amount - actual.amount) / expected.amount
         if diff > tolerance:
             return False
